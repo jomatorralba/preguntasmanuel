@@ -3,139 +3,341 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz de Geografía Española y Cuerpo Humano</title>
+    <title>Quiz de Cultura General Española</title>
     <style>
         body {
             font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
             max-width: 800px;
             margin: 0 auto;
             padding: 20px;
-            background-color: #f5f5f5;
-            color: #333;
-            line-height: 1.6;
+            background-color: #f4f4f4;
         }
         h1 {
             text-align: center;
             color: #2c3e50;
-            font-size: 2.5em;
-            margin-bottom: 1em;
         }
         .question {
             background-color: #fff;
             border-radius: 8px;
             padding: 20px;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
-        .question p {
-            font-size: 1.4em;
-            margin-bottom: 1em;
-        }
-        label {
-            display: block;
-            margin-bottom: 10px;
-            font-size: 1.2em;
-            cursor: pointer;
-        }
-        input[type="radio"] {
-            margin-right: 10px;
-            transform: scale(1.5);
+        .options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 10px;
         }
         button {
             background-color: #3498db;
             color: #fff;
             border: none;
-            padding: 10px 20px;
-            font-size: 1.2em;
+            padding: 10px 15px;
             border-radius: 5px;
             cursor: pointer;
+            font-size: 16px;
             transition: background-color 0.3s;
         }
         button:hover {
             background-color: #2980b9;
         }
         .feedback {
+            margin-top: 10px;
             font-weight: bold;
-            margin-top: 15px;
-            font-size: 1.2em;
-            padding: 10px;
-            border-radius: 5px;
         }
         .correct {
-            background-color: #2ecc71;
-            color: #fff;
+            color: #27ae60;
         }
         .incorrect {
-            background-color: #e74c3c;
-            color: #fff;
+            color: #e74c3c;
+        }
+        #result {
+            text-align: center;
+            font-size: 24px;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
-    <h1>Quiz de Geografía Española y Cuerpo Humano</h1>
+    <h1>Quiz de Cultura General Española</h1>
     <div id="quiz"></div>
+    <div id="result"></div>
 
     <script>
         const questions = [
             {
-                question: "¿Cuál es el río más largo de España?",
-                options: ["Tajo", "Ebro", "Duero"],
-                correctAnswer: 0
+                question: "¿Cuál es la capital de España?",
+                options: ["Barcelona", "Madrid", "Sevilla", "Valencia"],
+                correct: 1
             },
-            // ... (las 49 preguntas restantes permanecen iguales)
+            {
+                question: "¿En qué año se celebraron los Juegos Olímpicos de Barcelona?",
+                options: ["1988", "1992", "1996", "2000"],
+                correct: 1
+            },
+            {
+                question: "¿Quién pintó 'Las Meninas'?",
+                options: ["Pablo Picasso", "Salvador Dalí", "Diego Velázquez", "Francisco de Goya"],
+                correct: 2
+            },
+            {
+                question: "¿Cuál es el río más largo de España?",
+                options: ["Tajo", "Ebro", "Duero", "Guadalquivir"],
+                correct: 0
+            },
+            {
+                question: "¿En qué año se incorporó España a la Unión Europea?",
+                options: ["1975", "1986", "1992", "2002"],
+                correct: 1
+            },
+            {
+                question: "¿Quién escribió 'Don Quijote de la Mancha'?",
+                options: ["Miguel de Cervantes", "Federico García Lorca", "Antonio Machado", "Lope de Vega"],
+                correct: 0
+            },
+            {
+                question: "¿Cuál es el plato típico de Valencia?",
+                options: ["Gazpacho", "Paella", "Tortilla española", "Fabada"],
+                correct: 1
+            },
+            {
+                question: "¿En qué año se proclamó la Segunda República Española?",
+                options: ["1923", "1931", "1936", "1939"],
+                correct: 1
+            },
+            {
+                question: "¿Cuál es la montaña más alta de la península ibérica?",
+                options: ["Teide", "Aneto", "Mulhacén", "Veleta"],
+                correct: 2
+            },
+            {
+                question: "¿Quién fue el primer presidente del gobierno en la democracia española tras Franco?",
+                options: ["Felipe González", "Adolfo Suárez", "José María Aznar", "Leopoldo Calvo-Sotelo"],
+                correct: 1
+            },
+            {
+                question: "¿En qué ciudad se encuentra la Alhambra?",
+                options: ["Sevilla", "Córdoba", "Granada", "Málaga"],
+                correct: 2
+            },
+            {
+                question: "¿Cuál es la fiesta más famosa de Pamplona?",
+                options: ["La Tomatina", "Los Sanfermines", "Las Fallas", "El Carnaval"],
+                correct: 1
+            },
+            {
+                question: "¿Qué arquitecto diseñó la Sagrada Familia en Barcelona?",
+                options: ["Frank Gehry", "Antoni Gaudí", "Santiago Calatrava", "Rafael Moneo"],
+                correct: 1
+            },
+            {
+                question: "¿Cuál es el gentilicio de los habitantes de Bilbao?",
+                options: ["Bilbaínos", "Bilbaenses", "Bilbaitarras", "Bilbaoros"],
+                correct: 0
+            },
+            {
+                question: "¿En qué año se celebró la Expo de Sevilla?",
+                options: ["1986", "1992", "1998", "2000"],
+                correct: 1
+            },
+            {
+                question: "¿Cuál es el equipo de fútbol más antiguo de España?",
+                options: ["Real Madrid", "FC Barcelona", "Athletic Club", "Recreativo de Huelva"],
+                correct: 3
+            },
+            {
+                question: "¿Qué rey español abdicó en 2014?",
+                options: ["Juan Carlos I", "Felipe VI", "Alfonso XIII", "Carlos I"],
+                correct: 0
+            },
+            {
+                question: "¿Cuál es la isla más grande de las Islas Baleares?",
+                options: ["Menorca", "Ibiza", "Mallorca", "Formentera"],
+                correct: 2
+            },
+            {
+                question: "¿Quién compuso la ópera 'El Gato Montés'?",
+                options: ["Isaac Albéniz", "Manuel de Falla", "Enrique Granados", "Manuel Penella"],
+                correct: 3
+            },
+            {
+                question: "¿En qué provincia se encuentra el Parque Nacional de Doñana?",
+                options: ["Cádiz", "Sevilla", "Huelva", "Málaga"],
+                correct: 2
+            },
+            {
+                question: "¿Cuál es el nombre del aeropuerto de Madrid?",
+                options: ["Barajas", "Adolfo Suárez", "Madrid-Barajas", "Adolfo Suárez Madrid-Barajas"],
+                correct: 3
+            },
+            {
+                question: "¿Qué famoso pintor español es conocido por su estilo surrealista?",
+                options: ["Pablo Picasso", "Salvador Dalí", "Joan Miró", "Francisco de Goya"],
+                correct: 1
+            },
+            {
+                question: "¿En qué año se celebró la primera edición del Festival de Cine de San Sebastián?",
+                options: ["1935", "1953", "1967", "1975"],
+                correct: 1
+            },
+            {
+                question: "¿Cuál es el nombre del famoso camino de peregrinación que termina en Santiago de Compostela?",
+                options: ["Camino Real", "Camino de Santiago", "Ruta de la Plata", "Camino del Norte"],
+                correct: 1
+            },
+            {
+                question: "¿Quién fue el primer presidente de la democracia española elegido por sufragio universal?",
+                options: ["Adolfo Suárez", "Felipe González", "Leopoldo Calvo-Sotelo", "José María Aznar"],
+                correct: 1
+            },
+            {
+                question: "¿En qué año se adoptó la actual bandera de España?",
+                options: ["1785", "1843", "1931", "1978"],
+                correct: 0
+            },
+            {
+                question: "¿Cuál es el plato típico de Asturias?",
+                options: ["Paella", "Fabada", "Gazpacho", "Cocido madrileño"],
+                correct: 1
+            },
+            {
+                question: "¿Qué famoso museo de arte se encuentra en Madrid?",
+                options: ["Museo del Prado", "Museo Guggenheim", "Museo Thyssen-Bornemisza", "Museo Reina Sofía"],
+                correct: 0
+            },
+            {
+                question: "¿Cuál es la segunda lengua más hablada en España después del castellano?",
+                options: ["Catalán", "Gallego", "Vasco", "Valenciano"],
+                correct: 0
+            },
+            {
+                question: "¿En qué año se celebró la Exposición Universal de Barcelona?",
+                options: ["1888", "1929", "1992", "2004"],
+                correct: 1
+            },
+            {
+                question: "¿Quién es el autor de 'La Celestina'?",
+                options: ["Miguel de Cervantes", "Lope de Vega", "Fernando de Rojas", "Tirso de Molina"],
+                correct: 2
+            },
+            {
+                question: "¿Cuál es el nombre del estadio del Real Madrid?",
+                options: ["Camp Nou", "Santiago Bernabéu", "Vicente Calderón", "Metropolitano"],
+                correct: 1
+            },
+            {
+                question: "¿En qué año se aprobó la Constitución Española actual?",
+                options: ["1975", "1978", "1982", "1986"],
+                correct: 1
+            },
+            {
+                question: "¿Cuál es la comunidad autónoma más poblada de España?",
+                options: ["Cataluña", "Madrid", "Andalucía", "Comunidad Valenciana"],
+                correct: 2
+            },
+            {
+                question: "¿Qué famoso director de cine español ganó el Oscar por 'Todo sobre mi madre'?",
+                options: ["Luis Buñuel", "Pedro Almodóvar", "Alejandro Amenábar", "Carlos Saura"],
+                correct: 1
+            },
+            {
+                question: "¿Cuál es el nombre del famoso parque de atracciones de Barcelona?",
+                options: ["PortAventura", "Tibidabo", "Isla Mágica", "Warner Park"],
+                correct: 1
+            },
+            {
+                question: "¿En qué ciudad española nació Pablo Picasso?",
+                options: ["Madrid", "Barcelona", "Málaga", "Sevilla"],
+                correct: 2
+            },
+            {
+                question: "¿Cuál es el nombre de la plaza principal de Madrid?",
+                options: ["Plaza Mayor", "Puerta del Sol", "Plaza de España", "Plaza de Cibeles"],
+                correct: 0
+            },
+            {
+                question: "¿Qué valle es famoso por sus iglesias románicas en Cataluña?",
+                options: ["Valle de Arán", "Valle de Boí", "Valle del Jerte", "Valle de Ordesa"],
+                correct: 1
+            },
+            {
+                question: "¿Cuál es el gentilicio de los habitantes de San Sebastián?",
+                options: ["Donostiarras", "Sebastianenses", "Guipuzcoanos", "Vascos"],
+                correct: 0
+            }
         ];
 
-        function shuffleArray(array) {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
-            }
-        }
+        let currentQuestion = 0;
+        let score = 0;
 
-        function createQuiz() {
-            shuffleArray(questions);
+        function showQuestion() {
             const quizContainer = document.getElementById('quiz');
+            const question = questions[currentQuestion];
 
-            questions.forEach((q, index) => {
-                const questionDiv = document.createElement('div');
-                questionDiv.classList.add('question');
-                questionDiv.innerHTML = `
-                    <p><strong>Pregunta ${index + 1}:</strong> ${q.question}</p>
-                    ${q.options.map((option, i) => `
-                        <label>
-                            <input type="radio" name="q${index}" value="${i}">
-                            ${option}
-                        </label>
-                    `).join('')}
-                    <button onclick="checkAnswer(${index})">Comprobar</button>
-                    <div id="feedback${index}" class="feedback"></div>
+            let html = `
+                <div class="question">
+                    <h2>Pregunta ${currentQuestion + 1} de ${questions.length}</h2>
+                    <p>${question.question}</p>
+                    <div class="options">
+            `;
+
+            for (let i = 0; i < question.options.length; i++) {
+                html += `
+                    <button onclick="checkAnswer(${i})">${question.options[i]}</button>
                 `;
-                quizContainer.appendChild(questionDiv);
-            });
-        }
-
-        function checkAnswer(questionIndex) {
-            const selectedOption = document.querySelector(`input[name="q${questionIndex}"]:checked`);
-            const feedbackDiv = document.getElementById(`feedback${questionIndex}`);
-
-            if (selectedOption) {
-                const userAnswer = parseInt(selectedOption.value);
-                const correctAnswer = questions[questionIndex].correctAnswer;
-
-                if (userAnswer === correctAnswer) {
-                    feedbackDiv.textContent = "¡Correcto! Bien hecho.";
-                    feedbackDiv.className = "feedback correct";
-                } else {
-                    feedbackDiv.textContent = `Incorrecto. La respuesta correcta es: ${questions[questionIndex].options[correctAnswer]}`;
-                    feedbackDiv.className = "feedback incorrect";
-                }
-            } else {
-                feedbackDiv.textContent = "Por favor, selecciona una respuesta.";
-                feedbackDiv.className = "feedback";
             }
+
+            html += `
+                    </div>
+                    <div id="feedback" class="feedback"></div>
+                </div>
+            `;
+
+            quizContainer.innerHTML = html;
         }
 
-        createQuiz();
+        function checkAnswer(answer) {
+            const question = questions[currentQuestion];
+            const feedbackElement = document.getElementById('feedback');
+
+            if (answer === question.correct) {
+                feedbackElement.innerHTML = '¡Correcto!';
+                feedbackElement.className = 'feedback correct';
+                score++;
+            } else {
+                feedbackElement.innerHTML = `Incorrecto. La respuesta correcta es: ${question.options[question.correct]}`;
+                feedbackElement.className = 'feedback incorrect';
+            }
+
+            const buttons = document.querySelectorAll('button');
+            buttons.forEach(button => button.disabled = true);
+
+            setTimeout(() => {
+                currentQuestion++;
+                if (currentQuestion < questions.length) {
+                    showQuestion();
+                } else {
+                    showResult();
+                }
+            }, 2000);
+        }
+
+        function showResult() {
+            const quizContainer = document.getElementById('quiz');
+            const resultContainer = document.getElementById('result');
+
+            quizContainer.style.display = 'none';
+            resultContainer.innerHTML = `
+                <h2>Quiz completado</h2>
+                <p>Tu puntuación final es: ${score} de ${questions.length}</p>
+                <p>Nota: ${(score / questions.length * 10).toFixed(2)} / 10</p>
+            `;
+        }
+
+        showQuestion();
     </script>
 </body>
 </html>
